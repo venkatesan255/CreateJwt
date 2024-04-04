@@ -1,4 +1,3 @@
-
 name: Maven Package
 
 on:
@@ -26,3 +25,11 @@ jobs:
 
     - name: Build with Maven
       run: mvn -B package --file pom.xml
+
+    - name: Deploy artifact
+      uses: MavenPublish/action@v2
+      with:
+        maven-version: '3.8.3'
+        server-id: github
+        settings-path: ${{ github.workspace }} # location for the settings.xml file
+        file-to-publish: target/*.jar # Adjust the file pattern to match your artifact
